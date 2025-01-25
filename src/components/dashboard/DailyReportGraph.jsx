@@ -1,0 +1,132 @@
+import React, { useState } from 'react';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+
+
+const DailyReportGraph = () => {
+  const [selectedDate, setSelectedDate] = useState(new Date());
+
+  const data = [
+    { vehicle: 'GJ10CN6447', kms: 245 },
+    { vehicle: 'GJ10CN7834', kms: 312 },
+    { vehicle: 'GJ10CN9123', kms: 178 },
+    { vehicle: 'GJ10CP1245', kms: 423 },
+    { vehicle: 'GJ10CP3478', kms: 289 },
+    { vehicle: 'GJ10CP5690', kms: 156 },
+    { vehicle: 'GJ10CP7823', kms: 345 },
+    { vehicle: 'GJ10CP9034', kms: 267 },
+    { vehicle: 'GJ10CQ1256', kms: 189 },
+    { vehicle: 'GJ10CQ3478', kms: 432 },
+    { vehicle: 'GJ10CQ5689', kms: 276 },
+    { vehicle: 'GJ10CQ7890', kms: 198 },
+    { vehicle: 'GJ10CR1234', kms: 387 },
+    { vehicle: 'GJ10CR3456', kms: 234 },
+    { vehicle: 'GJ10CR5678', kms: 456 },
+    { vehicle: 'GJ10CR7890', kms: 321 },
+    { vehicle: 'GJ10CS1234', kms: 167 },
+    { vehicle: 'GJ10CS3456', kms: 398 },
+    { vehicle: 'GJ10CS5678', kms: 287 },
+    { vehicle: 'GJ10CS7890', kms: 345 },
+    { vehicle: 'GJ10CT1234', kms: 256 },
+    { vehicle: 'GJ10CT3456', kms: 389 },
+    { vehicle: 'GJ10CT5678', kms: 198 },
+    { vehicle: 'GJ10CT7890', kms: 467 },
+    { vehicle: 'GJ10CU1234', kms: 278 },
+    { vehicle: 'GJ10CU3456', kms: 356 },
+    { vehicle: 'GJ10CU5678', kms: 289 },
+    { vehicle: 'GJ10CU7890', kms: 412 },
+    { vehicle: 'GJ10CV1234', kms: 234 },
+    { vehicle: 'GJ10CV3456', kms: 378 },
+    { vehicle: 'GJ10CV5678', kms: 267 },
+    { vehicle: 'GJ10CV7890', kms: 445 },
+    { vehicle: 'GJ10CW1234', kms: 298 },
+    { vehicle: 'GJ10CW3456', kms: 367 }
+  ];
+
+  const handleDateChange = (date) => {
+    setSelectedDate(date);
+    // Here you would typically fetch data for the selected date
+  };
+
+  const CustomTooltip = ({ active, payload, label }) => {
+    if (active && payload && payload.length) {
+      return (
+        <div className="bg-white p-4 rounded-lg shadow-lg border border-gray-200 backdrop-blur-sm">
+          <p className="font-semibold text-gray-800 mb-1">{`Vehicle ${label}`}</p>
+          <p className="text-green-600 font-medium">{`Distance: ${payload[0].value} km`}</p>
+         
+        </div>
+      );
+    }
+    return null;
+  };
+
+  return (
+    <div className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
+        <div>
+          <h2 className="text-3xl font-bold bg-gradient-to-r from-green-600 to-emerald-500 bg-clip-text text-transparent">
+            Vehicle Distance Report
+          </h2>
+          <p className="text-gray-600 mt-2">Track daily vehicle performance</p>
+        </div>
+        <div className="flex items-center gap-4 bg-gray-50 p-3 rounded-lg">
+         
+        </div>
+      </div>
+      
+      <div className="w-full h-[500px] mt-4">
+        <ResponsiveContainer width="100%" height="100%">
+          <BarChart
+            data={data}
+            margin={{
+              top: 20,
+              right: 30,
+              left: 20,
+              bottom: 100
+            }}
+            barSize={25}
+          >
+            <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" opacity={0.7} />
+            <XAxis 
+              dataKey="vehicle" 
+              tick={{ fill: '#4B5563' }}
+              tickLine={{ stroke: '#4B5563' }}
+              axisLine={{ stroke: '#E5E7EB' }}
+              angle={-45}
+              textAnchor="end"
+              height={80}
+              interval={0}
+            />
+            <YAxis 
+              domain={[0, 500]}
+              tick={{ fill: '#4B5563' }}
+              tickLine={{ stroke: '#4B5563' }}
+              axisLine={{ stroke: '#E5E7EB' }}
+              label={{ value: 'Distance (km)', angle: -90, position: 'insideLeft', style: { fill: '#4B5563' } }}
+            />
+            <Tooltip 
+              content={<CustomTooltip />}
+              cursor={{ fill: 'rgba(34, 197, 94, 0.1)' }}
+            />
+            <Legend 
+              wrapperStyle={{
+                paddingTop: '20px',
+                fontSize: '14px'
+              }}
+            />
+            <Bar
+              dataKey="kms"
+              fill="#22c55e"
+              name="Distance Traveled (km)"
+              radius={[6, 6, 0, 0]}
+              animationDuration={1500}
+              animationBegin={0}
+            />
+          </BarChart>
+        </ResponsiveContainer>
+      </div>
+    </div>
+  );
+};
+
+export default DailyReportGraph;
