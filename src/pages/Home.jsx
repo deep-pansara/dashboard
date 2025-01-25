@@ -3,6 +3,7 @@ import StatasticsCard from '@/components/dashboard/StatasticsCard';
 import DailyReportGraph from '@/components/dashboard/DailyReportGraph';
 import VehicleTypeChart from '@/components/dashboard/VehicleTypeChart';
 import VehicleOnSite from '@/components/dashboard/VehicleOnSite';
+import MostTravelledVehicles from '@/components/dashboard/MostTravelledVehicles';
 
 
 const Home = () => {
@@ -93,6 +94,15 @@ const Home = () => {
         </div>
         <div>
           <VehicleOnSite />
+        </div>
+      </div>
+
+      <div className='flex gap-4 w-full'>
+        <div className="w-full">
+          <MostTravelledVehicles />
+        </div>
+        <div className="w-full">
+          <MostTravelledVehicles />
         </div>
       </div>
     </div>

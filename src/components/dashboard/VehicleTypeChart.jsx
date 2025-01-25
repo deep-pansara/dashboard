@@ -86,7 +86,7 @@ const VehicleTypeChart = () => {
                 )}
                 wrapperStyle={{
                   paddingLeft: '20px',
-                  fontSize: '14px'
+                  fontSize: '16px'
                 }}
               />
             </PieChart>
