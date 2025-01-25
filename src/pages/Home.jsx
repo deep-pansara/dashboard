@@ -1,6 +1,7 @@
 import React from 'react'
 import StatasticsCard from '@/components/dashboard/StatasticsCard';
 import DailyReportGraph from '@/components/dashboard/DailyReportGraph';
+import VehicleTypeChart from '@/components/dashboard/VehicleTypeChart';
 
 
 const Home = () => {
@@ -84,6 +85,15 @@ const Home = () => {
 
       <div>
         <DailyReportGraph />
+      </div>
+      <div className='flex'>
+        <div>
+
+        <VehicleTypeChart />
+        </div>
+        <div>
+          <VehicleTypeChart />
+        </div>
       </div>
     </div>
   )

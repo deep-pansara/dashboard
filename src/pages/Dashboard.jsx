@@ -6,19 +6,19 @@ import { Outlet } from 'react-router-dom'
 
 const Dashboard = () => {
   return (
-    <div className='p-1 bg-gray-100 min-h-screen'>
-      <div className="grid lg:grid-cols-8 grid-cols-1 gap-2 relative">
-        {/* Sidebar - full width on mobile/tablet, normal on desktop */}
-        <div className="lg:sticky lg:top-0 lg:h-screen w-full lg:col-span-2 xl:col-span-1 border border-slate-300 rounded-lg bg-white shadow-md">
+    <div className='p-1 bg-gray-100 w-full'>
+      <div className="grid lg:grid-cols-8 grid-cols-1 gap-2">
+        {/* Sidebar - fixed on desktop */}
+        <div className="lg:fixed lg:w-[calc(25%-0.5rem)] xl:w-[calc(12.5%-0.5rem)] lg:h-[calc(100vh-0.5rem)] border border-slate-300 rounded-lg bg-white shadow-md">
           <Sidebar/>
         </div>
         
-        {/* Main content area */}
-        <div className="lg:col-span-6 xl:col-span-7 w-full border border-slate-300 rounded-lg bg-white shadow-md">
-          <div className="sticky top-0 z-10 bg-white rounded-t-lg">
+        {/* Main content area with offset margin */}
+        <div className="lg:col-start-3 xl:col-start-2 lg:col-span-6 xl:col-span-7 w-full border border-slate-300 rounded-lg bg-white shadow-md">
+          <div className="sticky top-0 z-50 bg-white rounded-t-lg border-b border-slate-300">
             <Header/>
           </div>
-          <div >
+          <div className="overflow-y-auto h-[calc(100vh-5rem)]">
             <Outlet/>
           </div>
         </div>
