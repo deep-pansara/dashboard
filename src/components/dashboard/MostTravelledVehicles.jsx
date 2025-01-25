@@ -84,56 +84,60 @@ const MostTravelledVehicles = () => {
       {loading ? (
         <div className="w-full h-64 flex items-center justify-center">
           <div className="flex flex-col items-center">
-            <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-blue-500"></div>
-            <div className="mt-4 text-gray-500">Loading vehicle data...</div>
+            <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-b-4 border-blue-500"></div>
+            <div className="mt-4 text-sm text-gray-500">Loading vehicle data...</div>
           </div>
         </div>
       ) : (
-        <table className="min-w-full table-auto">
-          <thead>
-            <tr className="bg-gradient-to-r from-blue-50 to-teal-50 border-b border-gray-200">
-              <th className="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Rank</th>
-              <th className="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Vehicle Name</th>
-              <th className="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Number Plate</th>
-              <th className="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Distance (km)</th>
-              <th className="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Current Location</th>
-            </tr>
-          </thead>
-          <tbody className="bg-white divide-y divide-gray-200">
-            {vehicles.map((vehicle, index) => (
-              <tr 
-                key={vehicle.id}
-                className="hover:bg-gray-50 transition-all duration-200 ease-in-out transform hover:scale-[1.01]"
-              >
-                <td className="px-6 py-4 whitespace-nowrap">
-                  <div className={`inline-flex items-center justify-center w-8 h-8 rounded-full ${index < 3 ? 'bg-blue-100 text-blue-800' : 'bg-gray-100 text-gray-800'} font-bold`}>
-                    {index + 1}
-                  </div>
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  <div className="flex items-center">
-                    <div className="text-sm font-semibold text-gray-900 hover:text-blue-600 transition-colors">
-                      {vehicle.name}
-                    </div>
-                  </div>
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  <div className="text-sm font-medium text-gray-600">{vehicle.numberPlate}</div>
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  <div className="text-sm font-bold text-gray-900">
-                    {vehicle.distance.toLocaleString()} km
-                  </div>
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  <span className={`px-4 py-1.5 inline-flex text-sm leading-5 font-semibold rounded-full ${locationColors[vehicle.location]} shadow-sm hover:shadow-md transition-shadow`}>
-                    {vehicle.location}
-                  </span>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        <div className="overflow-x-auto">
+          <div className="h-[400px] overflow-y-auto">
+            <table className="min-w-full table-auto">
+              <thead className="sticky top-0 z-10">
+                <tr className="bg-gradient-to-r from-blue-50 to-teal-50 border-b border-gray-200">
+                  <th className="px-4 py-2 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Rank</th>
+                  <th className="px-4 py-2 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Vehicle Name</th>
+                  <th className="px-4 py-2 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Number Plate</th>
+                  <th className="px-4 py-2 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Distance (km)</th>
+                  <th className="px-4 py-2 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Current Location</th>
+                </tr>
+              </thead>
+              <tbody className="bg-white divide-y divide-gray-200">
+                {vehicles.map((vehicle, index) => (
+                  <tr 
+                    key={vehicle.id}
+                    className="hover:bg-gray-50 transition-all duration-200 ease-in-out transform hover:scale-[1.01]"
+                  >
+                    <td className="px-4 py-2 whitespace-nowrap">
+                      <div className={`inline-flex items-center justify-center w-6 h-6 rounded-full ${index < 3 ? 'bg-blue-100 text-blue-800' : 'bg-gray-100 text-gray-800'} font-bold text-xs`}>
+                        {index + 1}
+                      </div>
+                    </td>
+                    <td className="px-4 py-2 whitespace-nowrap">
+                      <div className="flex items-center">
+                        <div className="text-xs font-semibold text-gray-900 hover:text-blue-600 transition-colors">
+                          {vehicle.name}
+                        </div>
+                      </div>
+                    </td>
+                    <td className="px-4 py-2 whitespace-nowrap">
+                      <div className="text-xs font-medium text-gray-600">{vehicle.numberPlate}</div>
+                    </td>
+                    <td className="px-4 py-2 whitespace-nowrap">
+                      <div className="text-xs font-bold text-gray-900">
+                        {vehicle.distance.toLocaleString()} km
+                      </div>
+                    </td>
+                    <td className="px-4 py-2 whitespace-nowrap">
+                      <span className={`px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full ${locationColors[vehicle.location]} shadow-sm hover:shadow-md transition-shadow`}>
+                        {vehicle.location}
+                      </span>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
       )}
     </div>
   );

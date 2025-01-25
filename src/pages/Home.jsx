@@ -24,7 +24,7 @@ const Home = () => {
     },
     {
       title: 'Active Vehicles',
-      value: '1,024', // Changed to show actual vehicle count instead of dollar amount
+      value: '1,024',
       change: '+8%',
       trend: 'up',
       icon: (
@@ -36,7 +36,7 @@ const Home = () => {
     },
     {
       title: 'Vehicles under maintenance',
-      value: '156', // Changed to a more realistic number relative to total vehicles
+      value: '156',
       change: '-3%', 
       trend: 'down',
       icon: (
@@ -49,7 +49,7 @@ const Home = () => {
     },
     {
       title: 'Number of Insurances to be expired',
-      value: '302', // Changed to a more realistic number for upcoming insurance expirations
+      value: '302',
       change: '+5%',
       trend: 'up',
       icon: (
@@ -61,11 +61,9 @@ const Home = () => {
     }
   ];
 
-
-  
   return (
-    <div className="bg-gray-50 w-full h-screen p-4 flex flex-col gap-4 ">
-      <div className="">
+    <div className="bg-gray-50 w-full h-full p-4 flex flex-col gap-4 overflow-y-auto">
+      <div>
         <h1 className="text-2xl sm:text-3xl font-bold text-gray-800 mb-4 sm:mb-6">
           <span className="bg-gradient-to-r from-blue-600 to-teal-500 bg-clip-text text-transparent inline-flex items-center gap-2">
             Welcome back, John! 
@@ -86,25 +84,23 @@ const Home = () => {
         </div>
       </div>
 
-      <div>
+      <div className="grid grid-cols-1 gap-4">
+        
         <DailyReportGraph />
-      </div>
-      <div className='w-full grid grid-cols-1 lg:grid-cols-2 gap-4'>
-        <div>
-          <VehicleTypeChart />
+        
+        <div className='grid grid-cols-1 lg:grid-cols-2 gap-4'>
+          <MostTravelledVehicles />
+          <InsuranceExpireSoon />
         </div>
-        <div>
+
+        <div className='grid grid-cols-1 lg:grid-cols-3 gap-4'>
+          
+          <VehicleTypeChart />
+          
           <VehicleOnSite />
         </div>
-      </div>
 
-      <div className='flex gap-4 w-full'>
-        <div className="w-full">
-          <MostTravelledVehicles />
-        </div>
-        <div className="w-full">
-         <InsuranceExpireSoon />
-        </div>
+       
       </div>
     </div>
   )

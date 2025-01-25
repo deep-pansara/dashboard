@@ -20,13 +20,13 @@ const InsuranceExpireSoon = () => {
       name: "Hydra Crane HC-101",
       numberPlate: "GJ-01-AB-1234",
       expiryDate: "2025-02-8",
-      location: "AMNS Site",
+      location: "AMNS Site", 
       type: "Hydra Crane"
     },
     {
-      id: 2, 
-      name: "Bolero B-205",
-      numberPlate: "GJ-01-CD-5678", 
+      id: 2,
+      name: "Bolero B-205", 
+      numberPlate: "GJ-01-CD-5678",
       expiryDate: "2025-1-2",
       location: "Khurja",
       type: "Bolero"
@@ -34,16 +34,16 @@ const InsuranceExpireSoon = () => {
     {
       id: 3,
       name: "Bolero Camper BC-103",
-      numberPlate: "GJ-01-EF-9012",
+      numberPlate: "GJ-01-EF-9012", 
       expiryDate: "2024-02-28",
       location: "Panipat",
       type: "Bolero Camper"
     },
     {
       id: 4,
-      name: "Hydra Crane HC-102", 
+      name: "Hydra Crane HC-102",
       numberPlate: "GJ-01-GH-3456",
-      expiryDate: "2024-03-05",
+      expiryDate: "2024-03-05", 
       location: "Jamnagar",
       type: "Hydra Crane"
     },
@@ -53,6 +53,46 @@ const InsuranceExpireSoon = () => {
       numberPlate: "GJ-01-IJ-7890",
       expiryDate: "2024-03-10",
       location: "Dahej",
+      type: "Bolero"
+    },
+    {
+      id: 6,
+      name: "Hydra Crane HC-103",
+      numberPlate: "GJ-01-KL-1234",
+      expiryDate: "2024-03-15",
+      location: "Punjab",
+      type: "Hydra Crane"
+    },
+    {
+      id: 7,
+      name: "Bolero B-210",
+      numberPlate: "GJ-01-MN-5678",
+      expiryDate: "2024-03-20",
+      location: "Bina",
+      type: "Bolero"
+    },
+    {
+      id: 8,
+      name: "Bolero Camper BC-105",
+      numberPlate: "GJ-01-OP-9012",
+      expiryDate: "2024-03-25",
+      location: "Kanpur",
+      type: "Bolero Camper"
+    },
+    {
+      id: 9,
+      name: "Hydra Crane HC-104",
+      numberPlate: "GJ-01-QR-3456",
+      expiryDate: "2024-04-01",
+      location: "AMNS Site",
+      type: "Hydra Crane"
+    },
+    {
+      id: 10,
+      name: "Bolero B-212",
+      numberPlate: "GJ-01-ST-7890",
+      expiryDate: "2024-04-05",
+      location: "Khurja",
       type: "Bolero"
     }
   ];
@@ -82,16 +122,16 @@ const InsuranceExpireSoon = () => {
 
   return (
     <div className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100">
-      <div className="flex justify-between items-center mb-6">
+      <div className="flex justify-between items-center mb-4">
         <div className="flex items-center gap-3">
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-yellow-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-yellow-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
           </svg>
-          <h2 className="text-2xl font-bold bg-gradient-to-r from-yellow-600 to-red-500 bg-clip-text text-transparent">
+          <h2 className="text-xl font-bold bg-gradient-to-r from-yellow-600 to-red-500 bg-clip-text text-transparent">
             Insurance Expiring Soon
           </h2>
         </div>
-        <span className="text-sm bg-yellow-50 text-yellow-700 px-3 py-1 rounded-full font-medium">
+        <span className="text-xs bg-yellow-50 text-yellow-700 px-2 py-1 rounded-full font-medium">
           Next 30 Days
         </span>
       </div>
@@ -99,59 +139,63 @@ const InsuranceExpireSoon = () => {
       {loading ? (
         <div className="w-full h-64 flex items-center justify-center">
           <div className="flex flex-col items-center">
-            <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-yellow-500"></div>
-            <div className="mt-4 text-gray-500">Loading insurance data...</div>
+            <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-b-4 border-yellow-500"></div>
+            <div className="mt-4 text-sm text-gray-500">Loading insurance data...</div>
           </div>
         </div>
       ) : (
-        <table className="min-w-full table-auto">
-          <thead>
-            <tr className="bg-gradient-to-r from-yellow-50 to-red-50 border-b border-gray-200">
-              <th className="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Priority</th>
-              <th className="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Vehicle Name</th>
-              <th className="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Number Plate</th>
-              <th className="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Days Left</th>
-              <th className="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Current Location</th>
-            </tr>
-          </thead>
-          <tbody className="bg-white divide-y divide-gray-200">
-            {vehicles.map((vehicle, index) => {
-              const daysLeft = getDaysUntilExpiry(vehicle.expiryDate);
-              return (
-                <tr 
-                  key={vehicle.id}
-                  className="hover:bg-gray-50 transition-all duration-200 ease-in-out transform hover:scale-[1.01]"
-                >
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <div className={`inline-flex items-center justify-center w-8 h-8 rounded-full ${index < 3 ? 'bg-red-100 text-red-800' : 'bg-yellow-100 text-yellow-800'} font-bold`}>
-                      {index + 1}
-                    </div>
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <div className="flex items-center">
-                      <div className="text-sm font-semibold text-gray-900 hover:text-yellow-600 transition-colors">
-                        {vehicle.name}
-                      </div>
-                    </div>
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <div className="text-sm font-medium text-gray-600">{vehicle.numberPlate}</div>
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <div className={`text-sm font-bold ${getDaysLeftColor(daysLeft)}`}>
-                      {daysLeft} days
-                    </div>
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <span className={`px-4 py-1.5 inline-flex text-sm leading-5 font-semibold rounded-full ${locationColors[vehicle.location]} shadow-sm hover:shadow-md transition-shadow`}>
-                      {vehicle.location}
-                    </span>
-                  </td>
+        <div className="overflow-x-hidden">
+          <div className="h-[400px] overflow-y-auto">
+            <table className="min-w-full table-auto">
+              <thead className="sticky top-0 z-10">
+                <tr className="bg-gradient-to-r from-yellow-50 to-red-50 border-b border-gray-200">
+                  <th className="px-4 py-2 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Priority</th>
+                  <th className="px-4 py-2 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Vehicle Name</th>
+                  <th className="px-4 py-2 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Number Plate</th>
+                  <th className="px-4 py-2 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Days Left</th>
+                  <th className="px-4 py-2 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Current Location</th>
                 </tr>
-              );
-            })}
-          </tbody>
-        </table>
+              </thead>
+              <tbody className="bg-white divide-y divide-gray-200">
+                {vehicles.map((vehicle, index) => {
+                  const daysLeft = getDaysUntilExpiry(vehicle.expiryDate);
+                  return (
+                    <tr 
+                      key={vehicle.id}
+                      className="hover:bg-gray-50 transition-all duration-200 ease-in-out transform hover:scale-[1.01]"
+                    >
+                      <td className="px-4 py-2 whitespace-nowrap">
+                        <div className={`inline-flex items-center justify-center w-6 h-6 rounded-full ${index < 3 ? 'bg-red-100 text-red-800' : 'bg-yellow-100 text-yellow-800'} font-bold text-xs`}>
+                          {index + 1}
+                        </div>
+                      </td>
+                      <td className="px-4 py-2 whitespace-nowrap">
+                        <div className="flex items-center">
+                          <div className="text-xs font-semibold text-gray-900 hover:text-yellow-600 transition-colors">
+                            {vehicle.name}
+                          </div>
+                        </div>
+                      </td>
+                      <td className="px-4 py-2 whitespace-nowrap">
+                        <div className="text-xs font-medium text-gray-600">{vehicle.numberPlate}</div>
+                      </td>
+                      <td className="px-4 py-2 whitespace-nowrap">
+                        <div className={`text-xs font-bold ${getDaysLeftColor(daysLeft)}`}>
+                          {daysLeft} days
+                        </div>
+                      </td>
+                      <td className="px-4 py-2 whitespace-nowrap">
+                        <span className={`px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full ${locationColors[vehicle.location]} shadow-sm hover:shadow-md transition-shadow`}>
+                          {vehicle.location}
+                        </span>
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+        </div>
       )}
     </div>
   );
