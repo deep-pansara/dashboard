@@ -4,6 +4,7 @@ import DailyReportGraph from '@/components/dashboard/DailyReportGraph';
 import VehicleTypeChart from '@/components/dashboard/VehicleTypeChart';
 import VehicleOnSite from '@/components/dashboard/VehicleOnSite';
 import MostTravelledVehicles from '@/components/dashboard/MostTravelledVehicles';
+import InsuranceExpireSoon from '@/components/dashboard/InsuranceExpireSoon';
 
 
 const Home = () => {
@@ -102,7 +103,7 @@ const Home = () => {
           <MostTravelledVehicles />
         </div>
         <div className="w-full">
-          <MostTravelledVehicles />
+         <InsuranceExpireSoon />
         </div>
       </div>
     </div>
