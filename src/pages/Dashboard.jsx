@@ -6,7 +6,7 @@ import { Outlet } from 'react-router-dom'
 
 const Dashboard = () => {
   return (
-    <div className='p-1 bg-gray-100 w-full'>
+    <div className='p-1 bg-gray-100 w-full '>
       <div className="grid lg:grid-cols-8 grid-cols-1 gap-2">
         {/* Sidebar - fixed on desktop */}
         <div className="lg:fixed lg:w-[calc(25%-0.5rem)] xl:w-[calc(12.5%-0.5rem)] lg:h-[calc(100vh-0.5rem)] border border-slate-300 rounded-lg bg-white shadow-md">
@@ -18,7 +18,7 @@ const Dashboard = () => {
           <div className="sticky top-0 z-50 bg-white rounded-t-lg border-b border-slate-300">
             <Header/>
           </div>
-          <div className="overflow-y-auto h-[calc(100vh-5rem)]">
+          <div className="overflow-y-auto h-[calc(100vh-5rem)] ">
             <Outlet/>
           </div>
         </div>

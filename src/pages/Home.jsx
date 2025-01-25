@@ -2,6 +2,7 @@ import React from 'react'
 import StatasticsCard from '@/components/dashboard/StatasticsCard';
 import DailyReportGraph from '@/components/dashboard/DailyReportGraph';
 import VehicleTypeChart from '@/components/dashboard/VehicleTypeChart';
+import VehicleOnSite from '@/components/dashboard/VehicleOnSite';
 
 
 const Home = () => {
@@ -61,7 +62,7 @@ const Home = () => {
 
   
   return (
-    <div className="bg-gray-50 w-full h-screen p-4 flex flex-col gap-4">
+    <div className="bg-gray-50 w-full h-screen p-4 flex flex-col gap-4 ">
       <div className="">
         <h1 className="text-2xl sm:text-3xl font-bold text-gray-800 mb-4 sm:mb-6">
           <span className="bg-gradient-to-r from-blue-600 to-teal-500 bg-clip-text text-transparent inline-flex items-center gap-2">
@@ -86,13 +87,12 @@ const Home = () => {
       <div>
         <DailyReportGraph />
       </div>
-      <div className='flex'>
-        <div>
-
-        <VehicleTypeChart />
-        </div>
+      <div className='w-full grid grid-cols-1 lg:grid-cols-2 gap-4'>
         <div>
           <VehicleTypeChart />
+        </div>
+        <div>
+          <VehicleOnSite />
         </div>
       </div>
     </div>

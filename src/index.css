@@ -94,3 +94,38 @@
 
 }
 
+/* Custom scrollbar styles for main window */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(0, 0%, 0%);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(0, 0%, 0%);
+}
+
+/* Hide scrollbar for dashboard content */
+.h-\[calc\(100vh-5rem\)\]::-webkit-scrollbar {
+  display: none;
+}
+
+.h-\[calc\(100vh-5rem\)\] {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+/* Firefox scrollbar styles for main window */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: hsl(150, 7%, 5%) transparent;
+}
+

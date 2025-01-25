@@ -1,14 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { PieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip } from 'recharts';
 
-const VehicleTypeChart = () => {
+const VehicleOnSite = () => {
   const [loading, setLoading] = useState(true);
 
   const data = [
-    { name: 'Hydra Crane', value: 8 },
-    { name: 'Bolero', value: 12 }, 
-    { name: 'Bolero Camper', value: 10 },
-    { name: 'Bike', value: 4 }
+    { name: 'AMNS Site', value: 25 },
+    { name: 'Khurja', value: 18 },
+    { name: 'Panipat', value: 15 },
+    { name: 'Jamnagar', value: 12 },
+    { name: 'Dahej', value: 10 },
+    { name: 'Punjab', value: 8 },
+    { name: 'Bina', value: 7 },
+    { name: 'Kanpur', value: 5 }
   ];
 
   useEffect(() => {
@@ -19,15 +23,24 @@ const VehicleTypeChart = () => {
     return () => clearTimeout(timer);
   }, []);
 
-  const COLORS = ['hsl(var(--chart-1))', 'hsl(var(--chart-2))', 'hsl(var(--chart-3))', 'hsl(var(--chart-4))'];
+  const COLORS = [
+    'hsl(var(--chart-1))',
+    'hsl(var(--chart-2))',
+    'hsl(var(--chart-3))',
+    'hsl(var(--chart-4))',
+    '#4CAF50',
+    '#FF9800', 
+    '#9C27B0',
+    '#607D8B'
+  ];
 
   const CustomTooltip = ({ active, payload }) => {
     if (active && payload && payload.length) {
       return (
         <div className="bg-white/90 backdrop-blur-sm p-4 rounded-lg shadow-xl border border-gray-200">
           <p className="font-semibold text-gray-800 mb-1">{`${payload[0].name}`}</p>
-          <p className="text-gray-600 font-medium">{`Total Units: ${payload[0].value}`}</p>
-          <p className="text-xs text-gray-500 mt-1">{`${Math.round((payload[0].value / data.reduce((a,b) => a + b.value, 0)) * 100)}% of fleet`}</p>
+          <p className="text-gray-600 font-medium">{`Vehicles on Site: ${payload[0].value}`}</p>
+          <p className="text-xs text-gray-500 mt-1">{`${Math.round((payload[0].value / data.reduce((a,b) => a + b.value, 0)) * 100)}% of total`}</p>
         </div>
       );
     }
@@ -38,7 +51,7 @@ const VehicleTypeChart = () => {
     <div className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 w-full">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
         <h2 className="text-2xl font-bold text-gray-600">
-        Vehicles Type
+          Vehicles on Location
         </h2>
         <div className="text-sm text-gray-500 font-medium">
           Total Vehicles: {data.reduce((sum, item) => sum + item.value, 0)}
@@ -97,4 +110,4 @@ const VehicleTypeChart = () => {
   );
 };
 
-export default VehicleTypeChart;
+export default VehicleOnSite;
