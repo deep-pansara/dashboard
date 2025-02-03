@@ -1,8 +1,11 @@
+import DailyReportGraph from '@/components/dashboard/DailyReportGraph'
 import React from 'react'
 
 const Reports = () => {
   return (
-    <div>Reports</div>
+    <div className='flex p-2'>
+      <DailyReportGraph/>
+    </div>
   )
 }
 
