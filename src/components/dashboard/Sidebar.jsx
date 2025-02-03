@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-
+import img from "../../../public/logo.png"
 
 import { Link } from 'react-router-dom'
 
@@ -88,9 +88,9 @@ const Sidebar = () => {
 
       {/* Sidebar Content - Hidden on mobile/tablet unless toggled */}
       <div className={`${isOpen ? 'block' : 'hidden'} lg:block flex-grow`}>
-        <div className='p-4 md:p-6 bg-gradient-to-r from-blue-500 to-blue-600 rounded-t-lg'>
-          <div className="flex flex-col items-center">
-            <img src="https://dummyimage.com/200x100/3b82f6/ffffff&text=Logo" alt="Logo" className="w-32 md:w-48 h-auto mb-4 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300" />
+        <div className='rounded-t-lg p-4'>
+          <div className="flex flex-col items-center border-slate-300 border-b-1">
+            <img src={img} alt="Logo" className="w-full md:w-full h-auto my-6" />
           </div>
         </div>
         

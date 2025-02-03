@@ -31,7 +31,7 @@ const VehicleTypeChart = () => {
   };
 
   return (
-    <div className="bg-white p-4 rounded-lg shadow border border-gray-100">
+    <div className="bg-white p-4 rounded-lg shadow border border-gray-100 hover:shadow-xl transition-all duration-300">
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-lg font-bold text-gray-600">Vehicles Type</h2>
         <div className="text-sm text-gray-500">
