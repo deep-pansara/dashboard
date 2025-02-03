@@ -129,3 +129,6 @@
   scrollbar-color: hsl(150, 7%, 5%) transparent;
 }
 
+.active {
+  @apply transition-all duration-300 transform scale-105 shadow-md bg-green-50 rounded-xl text-green-600
+}
