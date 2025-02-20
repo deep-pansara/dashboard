@@ -12,16 +12,16 @@ const queryClient = new QueryClient()
 const App = () => {
 
   return (
-<Routes>
 <QueryClientProvider client={queryClient}>
+<Routes>
 <Route path='/' element={<Dashboard/>}>
     <Route index path='/' element={<Home/>} />
     <Route path='/vehicles' element={<Vehicles/>} />
     <Route path='/reports' element={<Reports/>} />
     <Route path='/insurance' element={<Insurance/>} />
 </Route>
-</QueryClientProvider>
 </Routes>
+</QueryClientProvider>
   )
 }
 
