@@ -8,10 +8,10 @@ const UserProfile = () => {
       className="flex items-center gap-3 cursor-pointer hover:opacity-80 transition-opacity"
       onClick={() => setIsDropdownOpen(!isDropdownOpen)}
     >
-      <span className="font-bold text-gray-600">John Doe</span>
+      <span className="font-bold text-gray-600">Deep Pansara</span>
       <div className="w-10 h-10 rounded-full overflow-hidden">
         <img 
-          src="https://ui-avatars.com/api/?name=John+Doe" 
+          src="https://ui-avatars.com/api/?name=Deep+Pansara&rounded=true" 
           alt="Profile"
           className="w-full h-full object-cover"
         />

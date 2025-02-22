@@ -66,7 +66,7 @@ const Home = () => {
       <div>
         <h1 className="text-2xl sm:text-3xl font-bold text-gray-800 mb-4 sm:mb-6">
           <span className="bg-gradient-to-r from-blue-600 to-teal-500 bg-clip-text text-transparent inline-flex items-center gap-2">
-            Welcome back, John! 
+            Welcome back, Deep! 
           </span>
         </h1>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-4 sm:gap-6">
