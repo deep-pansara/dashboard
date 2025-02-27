@@ -4,10 +4,9 @@ const {heroui} = require("@heroui/theme");
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
+    "./node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}",
     "./index.html",
-    "./src/**/*.{ts,tsx,js,jsx}",
-    "./node_modules/@heroui/theme/dist/components/(button|date-picker|ripple|spinner|calendar|date-input|form|popover).js"
-  ],
+    "./src/**/*.{ts,tsx,js,jsx}"],
   theme: {
     extend: {
       fontFamily: {
@@ -94,6 +93,6 @@ module.exports = {
       }
     }
   },
-  darkMode: ["class", "class"],
+  darkMode: "class",
   plugins: [heroui(), require("tailwindcss-animate")],
 };

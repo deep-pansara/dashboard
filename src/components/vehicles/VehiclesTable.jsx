@@ -1,146 +1,93 @@
 import React, { useState, useEffect } from 'react';
-import { Button } from '../ui/button';
 import { EditIcon, PlusIcon, TrashIcon } from 'lucide-react';
+import {
+  Modal,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  Button,
+  useDisclosure,
+} from "@heroui/react";
+import { useForm } from "react-hook-form";
+import { addVehicle } from '@/api/vehicle/addVehicle';
+import toast from 'react-hot-toast';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import getVehicles from '@/api/vehicle/getVehicles';
+import deleteVehicle from '@/api/vehicle/deleteVehicle';
 
 const VehiclesTable = () => {
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage] = useState(10); 
+  const [itemsPerPage] = useState(10);
+  const [vehicles, setVehicles] = useState([]);
+
+  const queryClient = useQueryClient()
+  const { data, isLoading, isError, error } = useQuery({ queryKey: ['vehicles'], queryFn: getVehicles })
+
+  const { mutate, isLoading: isDeleting } = useMutation({
+    mutationFn: deleteVehicle,
+    onSuccess: () => {
+      queryClient.invalidateQueries(["vehicles"]);
+    },
+  });
+
+  const { mutate: createVehicle, isLoading: isAdding } = useMutation({
+    mutationFn: addVehicle,
+    onSuccess: () => {
+      queryClient.invalidateQueries(["vehicles"]);
+    },
+  });
+
+
+  //madal logic
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [backdrop, setBackdrop] = React.useState("opaque");
+
+  const backdrops = ["blur"];
+
+  const handleOpen = (backdrop) => {
+    setBackdrop(backdrop);
+    onOpen();
+  };
+
+
+  //form logic
+  const { register, handleSubmit, reset, formState: { errors } } = useForm({
+    defaultValues: {
+      numberPlate: "GJ00XX0000",
+      type: "CAR",
+      make: "TATA",
+      model: "INDICA",
+      year: 2021,
+      location: "DAHEJ",
+      owner: "EXCEL TECHNICAL SERVICES PVT. LTD.",
+      contact: "9876543210",
+      mileage: 12
+    }
+  });
+
+  const onSubmit = async (data) => {
+    try {
+      createVehicle(data);
+    } catch (error) {
+      toast('Error adding vehicle', { icon: '❌' });
+      console.error(error);
+    }
+    reset();
+    onClose();
+  }
 
   const locationColors = {
     'AMNS Site': 'bg-blue-100 text-blue-800',
-    'Khurja': 'bg-green-100 text-green-800', 
+    'Khurja': 'bg-green-100 text-green-800',
     'Panipat': 'bg-purple-100 text-purple-800',
     'Jamnagar': 'bg-yellow-100 text-yellow-800',
-    'Dahej': 'bg-pink-100 text-pink-800',
+    'DAHEJ': 'bg-pink-100 text-pink-800',
     'Punjab': 'bg-indigo-100 text-indigo-800',
     'Bina': 'bg-red-100 text-red-800',
     'Kanpur': 'bg-orange-100 text-orange-800'
   };
-
-  const vehicles = [
-    {
-      id: 1,
-      name: "Hydra Crane HC-101",
-      numberPlate: "GJ-01-AB-1234",
-      distance: 2450,
-      location: "AMNS Site",
-      type: "Hydra Crane"
-    },
-    {
-      id: 2, 
-      name: "Bolero B-205",
-      numberPlate: "GJ-01-CD-5678",
-      distance: 2100,
-      location: "Khurja",
-      type: "Bolero"
-    },
-    {
-      id: 3,
-      name: "Bolero Camper BC-103",
-      numberPlate: "GJ-01-EF-9012",
-      distance: 1890,
-      location: "Panipat", 
-      type: "Bolero Camper"
-    },
-    {
-      id: 4,
-      name: "Hydra Crane HC-102",
-      numberPlate: "GJ-01-GH-3456",
-      distance: 1780,
-      location: "Jamnagar",
-      type: "Hydra Crane"
-    },
-    {
-      id: 5,
-      name: "Bolero B-208",
-      numberPlate: "GJ-01-IJ-7890",
-      distance: 1650,
-      location: "Dahej",
-      type: "Bolero"
-    },
-    {
-      id: 6,
-      name: "Hydra Crane HC-103",
-      numberPlate: "GJ-01-KL-2345",
-      distance: 3000,
-      location: "Vadodara",
-      type: "Hydra Crane"
-    },
-    {
-      id: 7,
-      name: "Tata Sumo Gold",
-      numberPlate: "GJ-01-MN-4567",
-      distance: 2100,
-      location: "Vapi",
-      type: "Tata Sumo"
-    },
-    {
-      id: 8,
-      name: "Bolero B-210",
-      numberPlate: "GJ-01-OP-6789",
-      distance: 1350,
-      location: "Surat",
-      type: "Bolero"
-    },
-    {
-      id: 9,
-      name: "Mahindra Scorpio",
-      numberPlate: "GJ-01-PQ-7891",
-      distance: 2650,
-      location: "Baroda",
-      type: "Mahindra Scorpio"
-    },
-    {
-      id: 10,
-      name: "JCB 3DX",
-      numberPlate: "GJ-01-RS-0123",
-      distance: 3200,
-      location: "Ahmedabad",
-      type: "JCB"
-    },
-    {
-      id: 11,
-      name: "Mahindra Thar",
-      numberPlate: "GJ-01-TU-4567",
-      distance: 2100,
-      location: "Rajkot",
-      type: "Mahindra Thar"
-    },
-    {
-      id: 12,
-      name: "Tata 407",
-      numberPlate: "GJ-01-VW-8901",
-      distance: 1500,
-      location: "Bhavnagar",
-      type: "Tata 407"
-    },
-    {
-      id: 13,
-      name: "Isuzu D-Max",
-      numberPlate: "GJ-01-XY-2345",
-      distance: 2700,
-      location: "Gandhinagar",
-      type: "Isuzu D-Max"
-    },
-    {
-      id: 14,
-      name: "Maruti Suzuki Ertiga",
-      numberPlate: "GJ-01-ZA-6789",
-      distance: 1200,
-      location: "Surat",
-      type: "Maruti Suzuki"
-    },
-    {
-      id: 15,
-      name: "Volvo FH16",
-      numberPlate: "GJ-01-AB-1235",
-      distance: 4200,
-      location: "Rajkot",
-      type: "Volvo"
-    }
-  ];
-  
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -150,11 +97,14 @@ const VehiclesTable = () => {
     return () => clearTimeout(timer);
   }, []);
 
+
+  const [year, setYear] = useState(new Date().getFullYear());
+
+
+
   // Pagination logic
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = vehicles.slice(indexOfFirstItem, indexOfLastItem);
-
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
@@ -168,16 +118,19 @@ const VehiclesTable = () => {
             All Vehicles
           </h2>
         </div>
-       
-       <div>
-        <Button variant="outline" className='bg-blue-600 text-white hover:bg-blue-700 cursor-pointer'> 
-          <PlusIcon className="w-4 h-4 mr-2" />
-          Add Vehicle
-        </Button>
-       </div>
+        <div className="flex flex-wrap gap-3">
+          <Button
+            className="capitalize flex items-center gap-2 border border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white transition duration-150 ease-in-out rounded-md cursor-pointer"
+            color="warning"
+            variant="flat"
+            onPress={() => handleOpen(backdrops[0])}>
+            <PlusIcon className="w-5 h-5" />
+            Add Vehicle
+          </Button>
+        </div>
       </div>
-      
-      {loading ? (
+
+      {isLoading ? (
         <div className="w-full h-64 flex items-center justify-center">
           <div className="flex flex-col items-center">
             <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-b-4 border-blue-500"></div>
@@ -190,18 +143,18 @@ const VehiclesTable = () => {
             <table className="min-w-full table-auto">
               <thead className="sticky top-0 z-10">
                 <tr className="bg-gradient-to-r from-blue-50 to-teal-50 border-b border-gray-200">
-                  <th className="px-4 py-2 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Rank</th>
+                  <th className="px-4 py-2 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Sr no</th>
                   <th className="px-4 py-2 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Vehicle Name</th>
                   <th className="px-4 py-2 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Number Plate</th>
-                  <th className="px-4 py-2 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Distance (km)</th>
+                  <th className="px-4 py-2 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Type</th>
                   <th className="px-4 py-2 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Current Location</th>
                   <th className="px-4 py-2 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Action</th>
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
-                {currentItems.map((vehicle, index) => (
-                  <tr 
-                    key={vehicle.id}
+                {data.vehicles.map((vehicle, index) => (
+                  <tr
+                    key={vehicle._id}
                     className="hover:bg-gray-50 transition-all duration-200 ease-in-out transform hover:scale-[1.01]"
                   >
                     <td className="px-4 py-2 whitespace-nowrap">
@@ -212,7 +165,7 @@ const VehiclesTable = () => {
                     <td className="px-4 py-2 whitespace-nowrap">
                       <div className="flex items-center">
                         <div className="text-xs font-semibold text-gray-900 hover:text-blue-600 transition-colors">
-                          {vehicle.name}
+                          {vehicle.model}
                         </div>
                       </div>
                     </td>
@@ -221,7 +174,7 @@ const VehiclesTable = () => {
                     </td>
                     <td className="px-4 py-2 whitespace-nowrap">
                       <div className="text-xs font-bold text-gray-900">
-                        {vehicle.distance.toLocaleString()} km
+                        {vehicle.type}
                       </div>
                     </td>
                     <td className="px-4 py-2 whitespace-nowrap">
@@ -231,47 +184,174 @@ const VehiclesTable = () => {
                     </td>
                     <td className="px-4 py-2 whitespace-nowrap">
                       <div className="flex space-x-2">
-                        <Button 
+                        <Button
                           variant="solid"
                           className="bg-green-600 text-white hover:bg-green-700 focus:ring-2 focus:ring-green-500 rounded-md transition duration-150 ease-in-out cursor-pointer"
-                          aria-label="Edit"> 
+                          aria-label="Edit">
                           <EditIcon className="w-5 h-5" />
                         </Button>
-                      
-                        <Button 
+
+                        <Button
+                          onPress={() => mutate(vehicle._id)}
                           variant="solid"
                           className="bg-red-600 text-white hover:bg-red-700 focus:ring-2 focus:ring-red-500 rounded-md transition duration-150 ease-in-out cursor-pointer"
-                          aria-label="Delete"> 
+                          aria-label="Delete">
                           <TrashIcon className="w-5 h-5" />
                         </Button>
+
                       </div>
                     </td>
                   </tr>
                 ))}
+
               </tbody>
             </table>
-            
-{/* Pagination */}
-<div className="flex justify-center mt-4">
-  <nav className="flex ">
-    {Array.from({ length: Math.ceil(vehicles.length / itemsPerPage) }, (_, i) => (
-      <Button key={i + 1} onClick={() => paginate(i + 1)} className={`mx-1 text-xsm font-medium ${
-          currentPage === i + 1
-            ? 'bg-blue-600 text-white'
-            : 'bg-white text-blue-600 hover:bg-blue-50'
-        } border border-gray-300 rounded-full transition duration-150 ease-in-out transform hover:scale-105 `}>
-        {i + 1}
-      </Button>
-    ))}
-    </nav>
-    </div>
-      </div>
+
+            {/* /* Modal start */}
+            <Modal backdrop={backdrop} isOpen={isOpen} onClose={onClose} className="border rounded-xl shadow-xl border-slate-300 max-w-4xl mx-auto" >
+              <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+                <ModalContent>
+                  {(onClose) => (
+                    <>
+                      <ModalHeader className="flex flex-col gap-1 text-center">Add New Vehicle</ModalHeader>
+                      <ModalBody>
+
+                        {/* form start here */}
+
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                          <div>
+                            <label className="block text-sm font-medium text-gray-700">Number Plate</label>
+                            <input
+                              type="text"
+
+                              {...register("numberPlate", { required: true })}
+                              className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                              placeholder='GJ00XX0000'
+                            />
+                            {errors.numberPlate && <span className="text-red-500 text-xs">This field is required</span>}
+                          </div>
+                          <div>
+                            <label className="block text-sm font-medium text-gray-700">Type</label>
+                            <input
+                              type="text"
+                              {...register("type", { required: true })}
+                              className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                              placeholder='CAR,CRANE,TRUCK'
+                            />
+                            {errors.type && <span className="text-red-500 text-xs">This field is required</span>}
+                          </div>
+                          <div>
+                            <label className="block text-sm font-medium text-gray-700">Make</label>
+                            <input
+                              type="text"
+                              {...register("make", { required: true })}
+                              className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                              placeholder='TATA,MAHINDRA,TOYOTA'
+                            />
+                            {errors.make && <span className="text-red-500 text-xs">This field is required</span>}
+                          </div>
+                          <div>
+                            <label className="block text-sm font-medium text-gray-700">Model</label>
+                            <input
+                              type="text"
+                              {...register("model", { required: true })}
+                              className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                            />
+                            {errors.model && <span className="text-red-500 text-xs">This field is required</span>}
+                          </div>
+                          <div>
+                            <label className="block text-sm font-medium text-gray-700">Year</label>
+                            <input
+                              type="number"
+                              {...register("year", { required: true, min: 1900, max: new Date().getFullYear() })}
+                              value={year}
+                              onChange={(e) => setYear(e.target.value)}
+                              min="1900"
+                              max={new Date().getFullYear()}
+                              step="1"
+                              placeholder="Enter year"
+                              className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                            />
+                            {errors.year && <span className="text-red-500 text-xs">This field is required</span>}
+                          </div>
+                          <div>
+                            <label className="block text-sm font-medium text-gray-700">Location</label>
+                            <input
+                              type="text"
+                              {...register("location", { required: true })}
+                              className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                              placeholder='DAHEJ,BINA,PUNJAB'
+                            />
+                            {errors.location && <span className="text-red-500 text-xs">This field is required</span>}
+                          </div>
+                          <div>
+                            <label className="block text-sm font-medium text-gray-700">Owner</label>
+                            <input
+                              type="text"
+                              {...register("owner", { required: true })}
+                              className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                              placeholder='EXCEL TECHNICAL SERVICES PVT. LTD.'
+                            />
+                            {errors.owner && <span className="text-red-500 text-xs">This field is required</span>}
+                          </div>
+                          <div>
+                            <label className="block text-sm font-medium text-gray-700">Contact</label>
+                            <input
+                              type="text"
+                              {...register("contact", { required: true })}
+                              className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                              placeholder='9876543210'
+                            />
+                            {errors.contact && <span className="text-red-500 text-xs">This field is required</span>}
+                          </div>
+                          <div>
+                            <label className="block text-sm font-medium text-gray-700">Mileage</label>
+                            <input
+                              type="number"
+                              {...register("mileage", { required: true, })}
+                              className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                            />
+                            {errors.mileage && <span className="text-red-500 text-xs">This field is required</span>}
+                          </div>
+                        </div>
+                        <div className="flex justify-end mt-4">
+                        </div>
+
+                      </ModalBody>
+                      <ModalFooter>
+                        <Button color="danger" variant="light" onPress={onClose} disabled={isDeleting ? true : false} className='cursor-pointer border border-slate-200 text-white bg-red-500 rounded-md hover:bg-red-600'>
+                          Cancel
+                        </Button>
+                        <Button color="primary" type='submit' onPress={errors.length == 0 ? onClose() : ""} className='cursor-pointer border border-slate-200 text-white bg-green-500 rounded-md hover:bg-green-600'>
+                          Add
+                        </Button>
+                      </ModalFooter>
+                    </>
+                  )}
+                </ModalContent>
+              </form>
+            </Modal>
+
+
+            {/* Modal end */}
+
+            {/* Pagination */}
+            <div className="flex justify-center mt-4">
+              <nav className="flex ">
+                {Array.from({ length: Math.ceil(data.count / itemsPerPage) }, (_, i) => (
+                  <Button key={i + 1} onClick={() => paginate(i + 1)} className={`mx-1 text-xsm font-medium ${currentPage === i + 1
+                    ? 'bg-blue-600 text-white'
+                    : 'bg-white text-blue-600 hover:bg-blue-50'
+                    } border border-gray-300 rounded-full transition duration-150 ease-in-out transform hover:scale-105 `}>
+                    {i + 1}
+                  </Button>
+                ))}
+              </nav>
+            </div>
           </div>
+        </div>
       )}
     </div>
-
-
-
   );
 };
 
