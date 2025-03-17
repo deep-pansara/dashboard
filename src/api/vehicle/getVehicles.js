@@ -5,10 +5,8 @@ export default async function getVehicles() {
             throw new Error(`HTTP error! Status: ${response.status}`);
         }
         const data = await response.json();
-        console.log("Vehicles Data:", data);
-        return data;
+        return data || [];
     } catch (error) {
-        console.error("Error fetching vehicles:", error);
+        return [];
     }
 }
-

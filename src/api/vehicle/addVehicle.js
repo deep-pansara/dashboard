@@ -15,7 +15,6 @@ export async function addVehicle(vehicle) {
         }
 
         const data = await response.json();
-        toast.success("Vehicle added successfully!");
         return data;
     } catch (error) {
 

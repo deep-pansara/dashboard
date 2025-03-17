@@ -37,7 +37,7 @@ const Home = () => {
     {
       title: 'Vehicles under maintenance',
       value: '156',
-      change: '-3%', 
+      change: '-3%',
       trend: 'down',
       icon: (
         <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -66,10 +66,10 @@ const Home = () => {
       <div>
         <h1 className="text-2xl sm:text-3xl font-bold text-gray-800 mb-4 sm:mb-6">
           <span className="bg-gradient-to-r from-blue-600 to-teal-500 bg-clip-text text-transparent inline-flex items-center gap-2">
-            Welcome back, Deep! 
+            Welcome back, Deep!
           </span>
         </h1>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-4 sm:gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4 xl:grid-cols-4 sm:gap-6">
           {cards.map((card, index) => (
             <StatasticsCard
               key={index}
@@ -84,23 +84,23 @@ const Home = () => {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 gap-4">
-        
+      <div className=" grid grid-cols-1 gap-4">
+
         <DailyReportGraph />
-        
+
         <div className='grid grid-cols-1 lg:grid-cols-2 gap-4'>
           <MostTravelledVehicles />
           <InsuranceExpireSoon />
         </div>
 
-        <div className='grid grid-cols-1 lg:grid-cols-4 gap-4'>
-          
+        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4'>
+
           <VehicleTypeChart />
-          
+
           <VehicleOnSite />
         </div>
 
-       
+
       </div>
     </div>
   )

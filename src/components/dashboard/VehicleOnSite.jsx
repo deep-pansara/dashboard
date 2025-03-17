@@ -38,14 +38,14 @@ const VehicleOnSite = () => {
   };
 
   return (
-    <div className="bg-white p-4 rounded-lg shadow border border-gray-100 hover:shadow-xl transition-all duration-300">
+    <div className="bg-white p-4 rounded-lg shadow-xs border border-gray-300 hover:shadow-lg transition-all duration-300">
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-lg font-bold text-gray-600">Vehicles on Site</h2>
         <div className="text-sm text-gray-500">
           Total: {data.reduce((sum, item) => sum + item.value, 0)}
         </div>
       </div>
-      
+
       <div style={{ width: '100%', height: 250 }}>
         {loading ? (
           <div className="w-full h-full flex items-center justify-center">
@@ -64,14 +64,14 @@ const VehicleOnSite = () => {
                 animationDuration={1000}
               >
                 {data.map((entry, index) => (
-                  <Cell 
-                    key={`cell-${index}`} 
+                  <Cell
+                    key={`cell-${index}`}
                     fill={COLORS[index % COLORS.length]}
                   />
                 ))}
               </Pie>
               <Tooltip content={<CustomTooltip />} />
-              <Legend 
+              <Legend
                 layout="vertical"
                 align="right"
                 verticalAlign="middle"

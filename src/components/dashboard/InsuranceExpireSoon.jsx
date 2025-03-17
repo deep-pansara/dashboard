@@ -5,7 +5,7 @@ const InsuranceExpireSoon = () => {
 
   const locationColors = {
     'AMNS Site': 'bg-blue-100 text-blue-800',
-    'Khurja': 'bg-green-100 text-green-800', 
+    'Khurja': 'bg-green-100 text-green-800',
     'Panipat': 'bg-purple-100 text-purple-800',
     'Jamnagar': 'bg-yellow-100 text-yellow-800',
     'Dahej': 'bg-pink-100 text-pink-800',
@@ -20,12 +20,12 @@ const InsuranceExpireSoon = () => {
       name: "Hydra Crane HC-101",
       numberPlate: "GJ-01-AB-1234",
       expiryDate: "2025-02-8",
-      location: "AMNS Site", 
+      location: "AMNS Site",
       type: "Hydra Crane"
     },
     {
       id: 2,
-      name: "Bolero B-205", 
+      name: "Bolero B-205",
       numberPlate: "GJ-01-CD-5678",
       expiryDate: "2025-1-2",
       location: "Khurja",
@@ -34,7 +34,7 @@ const InsuranceExpireSoon = () => {
     {
       id: 3,
       name: "Bolero Camper BC-103",
-      numberPlate: "GJ-01-EF-9012", 
+      numberPlate: "GJ-01-EF-9012",
       expiryDate: "2024-02-28",
       location: "Panipat",
       type: "Bolero Camper"
@@ -43,7 +43,7 @@ const InsuranceExpireSoon = () => {
       id: 4,
       name: "Hydra Crane HC-102",
       numberPlate: "GJ-01-GH-3456",
-      expiryDate: "2024-03-05", 
+      expiryDate: "2024-03-05",
       location: "Jamnagar",
       type: "Hydra Crane"
     },
@@ -121,7 +121,7 @@ const InsuranceExpireSoon = () => {
   };
 
   return (
-    <div className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100">
+    <div className="bg-white p-6 rounded-xl shadow-xs hover:shadow-lg transition-all duration-300 border border-gray-300">
       <div className="flex justify-between items-center mb-4">
         <div className="flex items-center gap-3">
           <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-yellow-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -135,7 +135,7 @@ const InsuranceExpireSoon = () => {
           Next 30 Days
         </span>
       </div>
-      
+
       {loading ? (
         <div className="w-full h-64 flex items-center justify-center">
           <div className="flex flex-col items-center">
@@ -160,7 +160,7 @@ const InsuranceExpireSoon = () => {
                 {vehicles.map((vehicle, index) => {
                   const daysLeft = getDaysUntilExpiry(vehicle.expiryDate);
                   return (
-                    <tr 
+                    <tr
                       key={vehicle.id}
                       className="hover:bg-gray-50 transition-all duration-200 ease-in-out transform hover:scale-[1.01]"
                     >
