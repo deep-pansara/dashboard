@@ -212,7 +212,6 @@ const VehiclesTable = () => {
               <thead className="sticky top-0 z-10">
                 <tr className="bg-gradient-to-r from-blue-50 to-teal-50 border-b border-gray-200">
                   <th className="px-4 py-2 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Sr no</th>
-                  <th className="px-4 py-2 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Vehicle Name</th>
                   <th className="px-4 py-2 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Number Plate</th>
                   <th className="px-4 py-2 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Type</th>
                   <th className="px-4 py-2 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Current Location</th>
@@ -230,13 +229,7 @@ const VehiclesTable = () => {
                         {index + 1 + (currentPage - 1) * itemsPerPage}
                       </div>
                     </td>
-                    <td className="px-4 py-2 whitespace-nowrap">
-                      <div className="flex items-center">
-                        <div className="text-xs font-semibold text-gray-900 hover:text-blue-600 transition-colors">
-                          {vehicle.model}
-                        </div>
-                      </div>
-                    </td>
+
                     <td className="px-4 py-2 whitespace-nowrap">
                       <div className="text-xs font-medium text-gray-600">{vehicle.numberPlate}</div>
                     </td>
@@ -317,12 +310,14 @@ const VehiclesTable = () => {
                               {...register("make", { required: "Make is required" })}
                               className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                               placeholder='TATA,MAHINDRA,TOYOTA'
+                              value={"MAHINDRA"}
                             />
                             {errors.make && <span className="text-red-500 text-xs">{errors.make.message}</span>}
                           </div>
                           <div>
                             <label className="block text-sm font-medium text-gray-700">Model</label>
                             <input
+                              value={"-"}
                               type="text"
                               {...register("model", { required: "Model is required" })}
                               className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
@@ -340,6 +335,7 @@ const VehiclesTable = () => {
                               })}
                               min="1900"
                               max={new Date().getFullYear()}
+                              value={new Date().getFullYear()}
                               step="1"
                               placeholder="Enter year"
                               className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
@@ -353,6 +349,7 @@ const VehiclesTable = () => {
                               {...register("location", { required: "Location is required" })}
                               className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                               placeholder='DAHEJ,BINA,PUNJAB'
+
                             />
                             {errors.location && <span className="text-red-500 text-xs">{errors.location.message}</span>}
                           </div>
@@ -363,6 +360,7 @@ const VehiclesTable = () => {
                               {...register("owner", { required: "Owner is required" })}
                               className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                               placeholder='EXCEL TECHNICAL SERVICES PVT. LTD.'
+                              value={'EXCEL TECHNICAL SERVICES PVT. LTD.'}
                             />
                             {errors.owner && <span className="text-red-500 text-xs">{errors.owner.message}</span>}
                           </div>
@@ -373,6 +371,7 @@ const VehiclesTable = () => {
                               {...register("contact", { required: "Contact is required" })}
                               className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                               placeholder='9876543210'
+                              value={'+919879879879'}
                             />
                             {errors.contact && <span className="text-red-500 text-xs">{errors.contact.message}</span>}
                           </div>
@@ -411,23 +410,23 @@ const VehiclesTable = () => {
             </Modal>
 
             {/* Pagination */}
-            {vehiclesData && vehiclesData.vehicles && vehiclesData.vehicles.length > 0 && (
+            {/* {vehiclesData?.vehicles?.length > 0 && (
               <div className="flex justify-center mt-4">
                 <nav className="flex">
                   {Array.from({ length: totalPages }, (_, i) => (
                     <Button
                       key={i + 1}
-                      onPress={() => paginate(i + 1)}
-                      className={`mx-1 text-xsm font-medium ${currentPage === i + 1
-                        ? 'bg-blue-600 text-white'
-                        : 'bg-white text-blue-600 hover:bg-blue-50'
-                        } border border-gray-300 rounded-full transition duration-150 ease-in-out transform hover:scale-105`}>
+                      onClick={() => paginate(i + 1)}
+                      className={`mx-1 text-xsm font-medium ${currentPage === i + 1 ? 'bg-blue-600 text-white' : 'bg-white text-blue-600 hover:bg-blue-50'
+                        } border border-gray-300 rounded-full transition duration-150 ease-in-out transform hover:scale-105`}
+                    >
                       {i + 1}
                     </Button>
                   ))}
                 </nav>
               </div>
-            )}
+            )} */}
+
           </div>
         </div>
       )}

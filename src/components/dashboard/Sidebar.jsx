@@ -5,7 +5,7 @@ import { Link, NavLink } from 'react-router-dom'
 
 const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const  [selectedItem, setSelectedItem] = useState("/");
+  const [selectedItem, setSelectedItem] = useState("/");
 
   const menuItems = [
     {
@@ -19,7 +19,7 @@ const Sidebar = () => {
     },
     {
       title: 'Vehicles',
-      path: '/vehicles', 
+      path: '/vehicles',
       icon: (
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
           <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 00-3.213-9.193 2.056 2.056 0 00-1.58-.86H14.25M16.5 18.75h-2.25m0-11.177v-.958c0-.568-.422-1.048-.987-1.106a48.554 48.554 0 00-10.026 0 1.106 1.106 0 00-.987 1.106v7.635m12-6.677v6.677m0 4.5v-4.5m0 0h-12" />
@@ -35,7 +35,7 @@ const Sidebar = () => {
         </svg>
       )
     },
-   
+
     {
       title: 'Insurance',
       path: '/insurance',
@@ -66,15 +66,15 @@ const Sidebar = () => {
     <div className='flex flex-col h-full bg-white rounded-lg shadow-lg'>
 
       {/* Mobile/Tablet Menu Button */}
-      <button 
+      <button
         onClick={() => setIsOpen(!isOpen)}
         className="lg:hidden p-4 hover:bg-gray-100 transition-colors duration-200"
       >
-        <svg 
-          xmlns="http://www.w3.org/2000/svg" 
-          fill="none" 
-          viewBox="0 0 24 24" 
-          stroke="currentColor" 
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
           className="w-6 h-6"
         >
           {isOpen ? (
@@ -92,11 +92,11 @@ const Sidebar = () => {
             <img src={img} alt="Logo" className="w-full md:w-full h-auto my-6" />
           </div>
         </div>
-        
+
         <div className='flex flex-col gap-2 p-3 md:p-4 flex-grow'>
           {menuItems.map((item, index) => (
             <NavLink to={item.path} key={index} onClick={() => setIsOpen(false)}>
-              <div className='p-2 md:p-3 hover:bg-green-50 rounded-xl cursor-pointer  hover:text-green-600 transition-all duration-300 transform hover:scale-105 hover:shadow-md'>
+              <div className='p-2 md:p-3 hover:bg-green-50 rounded-xl cursor-pointer  hover:text-green-600 transition-all duration-300 transform hover:scale-100 hover:shadow-sm'>
                 <div className='flex items-center gap-2 md:gap-3'>
                   <div className='transition-colors duration-300'>
                     {item.icon}
@@ -111,7 +111,7 @@ const Sidebar = () => {
 
         <div className='p-3 md:p-4 border-t border-gray-100'>
           <Link to={logoutItem.path} onClick={() => setIsOpen(false)}>
-            <div className='p-2 md:p-3 hover:bg-red-50 rounded-xl cursor-pointer text-gray-700 hover:text-red-600 transition-all duration-300 transform hover:scale-105 hover:shadow-md'>
+            <div className='p-2 md:p-3 hover:bg-red-50 rounded-xl cursor-pointer text-gray-700 hover:text-red-600 transition-all duration-300 transform hover:shadow-sm'>
               <div className='flex items-center gap-2 md:gap-3'>
                 <div className='transition-colors duration-300'>
                   {logoutItem.icon}

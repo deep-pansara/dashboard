@@ -21,40 +21,40 @@ const DailyReportGraph = () => {
   // vehicleNo and distance
 
   const demoData = [
-    { vehicle: 'GJ10CN6447', kms: 245, location: 'Jamnagar' },
-    { vehicle: 'GJ10CN7834', kms: 312, location: 'Khurja' },
-    { vehicle: 'GJ10CN9123', kms: 178, location: 'Panipat' },
-    { vehicle: 'GJ10CP1245', kms: 423, location: 'Jamnagar' },
-    { vehicle: 'GJ10CP3478', kms: 289, location: 'Khurja' },
-    { vehicle: 'GJ10CP5690', kms: 156, location: 'Panipat' },
-    { vehicle: 'GJ10CP7823', kms: 345, location: 'Jamnagar' },
-    { vehicle: 'GJ10CP9034', kms: 267, location: 'Khurja' },
-    { vehicle: 'GJ10CQ1256', kms: 189, location: 'Panipat' },
-    { vehicle: 'GJ10CQ3478', kms: 432, location: 'Jamnagar' },
-    { vehicle: 'GJ10CQ5689', kms: 276, location: 'Khurja' },
-    { vehicle: 'GJ10CQ7890', kms: 198, location: 'Panipat' },
-    { vehicle: 'GJ10CR1234', kms: 387, location: 'Jamnagar' },
-    { vehicle: 'GJ10CR3456', kms: 234, location: 'Khurja' },
-    { vehicle: 'GJ10CR5678', kms: 456, location: 'Panipat' },
-    { vehicle: 'GJ10CR7890', kms: 321, location: 'Jamnagar' },
-    { vehicle: 'GJ10CS1234', kms: 167, location: 'Khurja' },
-    { vehicle: 'GJ10CS3456', kms: 398, location: 'Panipat' },
-    { vehicle: 'GJ10CS5678', kms: 287, location: 'Jamnagar' },
-    { vehicle: 'GJ10CS7890', kms: 345, location: 'Khurja' },
-    { vehicle: 'GJ10CT1234', kms: 256, location: 'Panipat' },
-    { vehicle: 'GJ10CT3456', kms: 389, location: 'Jamnagar' },
-    { vehicle: 'GJ10CT5678', kms: 198, location: 'Khurja' },
-    { vehicle: 'GJ10CT7890', kms: 467, location: 'Panipat' },
-    { vehicle: 'GJ10CU1234', kms: 278, location: 'Jamnagar' },
-    { vehicle: 'GJ10CU3456', kms: 356, location: 'Khurja' },
-    { vehicle: 'GJ10CU5678', kms: 289, location: 'Panipat' },
-    { vehicle: 'GJ10CU7890', kms: 412, location: 'Jamnagar' },
-    { vehicle: 'GJ10CV1234', kms: 234, location: 'Khurja' },
-    { vehicle: 'GJ10CV3456', kms: 378, location: 'Panipat' },
-    { vehicle: 'GJ10CV5678', kms: 267, location: 'Jamnagar' },
-    { vehicle: 'GJ10CV7890', kms: 445, location: 'Khurja' },
-    { vehicle: 'GJ10CW1234', kms: 298, location: 'Panipat' },
-    { vehicle: 'GJ10CW3456', kms: 367, location: 'Jamnagar' }
+    { vehicle: 'GJ10CN6447', distance: 245, location: 'Jamnagar' },
+    { vehicle: 'GJ10CN7834', distance: 312, location: 'Khurja' },
+    { vehicle: 'GJ10CN9123', distance: 178, location: 'Panipat' },
+    { vehicle: 'GJ10CP1245', distance: 423, location: 'Jamnagar' },
+    { vehicle: 'GJ10CP3478', distance: 289, location: 'Khurja' },
+    { vehicle: 'GJ10CP5690', distance: 156, location: 'Panipat' },
+    { vehicle: 'GJ10CP7823', distance: 345, location: 'Jamnagar' },
+    { vehicle: 'GJ10CP9034', distance: 267, location: 'Khurja' },
+    { vehicle: 'GJ10CQ1256', distance: 189, location: 'Panipat' },
+    { vehicle: 'GJ10CQ3478', distance: 432, location: 'Jamnagar' },
+    { vehicle: 'GJ10CQ5689', distance: 276, location: 'Khurja' },
+    { vehicle: 'GJ10CQ7890', distance: 198, location: 'Panipat' },
+    { vehicle: 'GJ10CR1234', distance: 387, location: 'Jamnagar' },
+    { vehicle: 'GJ10CR3456', distance: 234, location: 'Khurja' },
+    { vehicle: 'GJ10CR5678', distance: 456, location: 'Panipat' },
+    { vehicle: 'GJ10CR7890', distance: 321, location: 'Jamnagar' },
+    { vehicle: 'GJ10CS1234', distance: 167, location: 'Khurja' },
+    { vehicle: 'GJ10CS3456', distance: 398, location: 'Panipat' },
+    { vehicle: 'GJ10CS5678', distance: 287, location: 'Jamnagar' },
+    { vehicle: 'GJ10CS7890', distance: 345, location: 'Khurja' },
+    { vehicle: 'GJ10CT1234', distance: 256, location: 'Panipat' },
+    { vehicle: 'GJ10CT3456', distance: 389, location: 'Jamnagar' },
+    { vehicle: 'GJ10CT5678', distance: 198, location: 'Khurja' },
+    { vehicle: 'GJ10CT7890', distance: 467, location: 'Panipat' },
+    { vehicle: 'GJ10CU1234', distance: 278, location: 'Jamnagar' },
+    { vehicle: 'GJ10CU3456', distance: 356, location: 'Khurja' },
+    { vehicle: 'GJ10CU5678', distance: 289, location: 'Panipat' },
+    { vehicle: 'GJ10CU7890', distance: 412, location: 'Jamnagar' },
+    { vehicle: 'GJ10CV1234', distance: 234, location: 'Khurja' },
+    { vehicle: 'GJ10CV3456', distance: 378, location: 'Panipat' },
+    { vehicle: 'GJ10CV5678', distance: 267, location: 'Jamnagar' },
+    { vehicle: 'GJ10CV7890', distance: 445, location: 'Khurja' },
+    { vehicle: 'GJ10CW1234', distance: 298, location: 'Panipat' },
+    { vehicle: 'GJ10CW3456', distance: 367, location: 'Jamnagar' }
   ];
 
   useEffect(() => {
@@ -161,7 +161,7 @@ const DailyReportGraph = () => {
         ) : (
           <ResponsiveContainer width="100%" height="100%">
             <BarChart
-              data={data.distances ? data.distances : demoData}
+              data={demoData}
               margin={{
                 top: 0,
                 right: 20,

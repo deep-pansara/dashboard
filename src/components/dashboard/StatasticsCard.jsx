@@ -2,7 +2,7 @@ import React from 'react'
 
 const StatasticsCard = ({ index, title, value, change, trend, icon, bgColor }) => {
   return (
-    <div key={index} className="bg-white rounded-xl shadow-xs border border-gray-300 p-4 sm:p-6 transform transition-all duration-300  hover:shadow-lg">
+    <div key={index} className="bg-white rounded-xl shadow-xs border border-gray-300 p-4 sm:p-6 transform transition-all duration-300  hover:shadow-md">
       <div className="flex items-center justify-between">
         <div className="flex-1 min-w-0">
           <p className="text-gray-500 text-sm font-medium whitespace-normal">{title}</p>
